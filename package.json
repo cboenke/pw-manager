@@ -1,0 +1,28 @@
+{
+  "name": "pw-manager",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cboenke/pw-manager.git"
+  },
+  "author": "Clara Bönke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cboenke/pw-manager/issues"
+  },
+  "homepage": "https://github.com/cboenke/pw-manager#readme",
+  "keywords": [],
+  "description": "Password manager for Node.js",
+  "devDependencies": {
+    "@types/node": "^14.14.31",
+    "typescript": "^4.2.2"
+  }
+}
