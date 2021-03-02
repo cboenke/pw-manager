@@ -1,7 +1,26 @@
-const [command] = process.argv.slice(2);
+import { handleGetPassword, handleSetPassword, hasAccess } from "./commands";
+import { printNoAccess, printWelcomeMessage } from "./messages";
+import { askForAction, askForCredentials } from "./questions";
 
-if (command === "set") {
-  console.log("Vamos a la playa!");
-} else if (command === "get") {
-  console.log("Let's go shopping!");
-}
+const run = async () => {
+  printWelcomeMessage();
+
+  const credentials = await askForCredentials();
+  if (!hasAccess(credentials.masterPassword)) {
+    printNoAccess();
+    run();
+    return;
+  }
+
+  const action = await askForAction();
+  switch (action.command) {
+    case "set":
+      handleSetPassword(action.passwordName);
+      break;
+    case "get":
+      handleGetPassword(action.passwordName);
+      break;
+  }
+};
+
+run();
