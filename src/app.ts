@@ -12,6 +12,14 @@ const run = async () => {
     const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
     console.log("Connected to DB!");
+
+    const db = await client.db("pw-manager-clara");
+
+    await db.collection("inventory").insertOne({
+      dessert: "cake",
+      variety: ["carrot cake", "marble cake", "apple pie"],
+      tags: ["contains gluten", "not vegan"],
+    });
     client.close();
   } catch (error) {
     console.error(error);
