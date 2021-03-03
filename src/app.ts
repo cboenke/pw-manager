@@ -3,7 +3,14 @@ import { printNoAccess, printWelcomeMessage } from "./messages";
 import { askForAction, askForCredentials } from "./questions";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
-import { closeDB, connectDB, getCollection } from "./db";
+import {
+  closeDB,
+  connectDB,
+  createPasswordDoc,
+  deletePasswordDoc,
+  readPasswordDoc,
+  updatePasswordDoc,
+} from "./db";
 dotenv.config();
 
 const run = async () => {
@@ -11,7 +18,10 @@ const run = async () => {
 
   try {
     await connectDB(url, "pw-manager-clara");
-    await getCollection("passwords");
+    await createPasswordDoc({ name: "Clara", value: "0110" });
+    console.log(await readPasswordDoc("Clara"));
+    await updatePasswordDoc({ name: "Clara", value: "1001" });
+    await deletePasswordDoc("Clara");
     await closeDB();
   } catch (error) {
     console.error(error);
