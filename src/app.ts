@@ -3,24 +3,16 @@ import { printNoAccess, printWelcomeMessage } from "./messages";
 import { askForAction, askForCredentials } from "./questions";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
+import { closeDB, connectDB, getCollection } from "./db";
 dotenv.config();
 
 const run = async () => {
   const url = process.env.MONGODB_URL;
 
   try {
-    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
-
-    console.log("Connected to DB!");
-
-    const db = await client.db("pw-manager-clara");
-
-    await db.collection("inventory").insertOne({
-      dessert: "cake",
-      variety: ["carrot cake", "marble cake", "apple pie"],
-      tags: ["contains gluten", "not vegan"],
-    });
-    client.close();
+    await connectDB(url, "pw-manager-clara");
+    await getCollection("passwords");
+    await closeDB();
   } catch (error) {
     console.error(error);
   }
