@@ -31,15 +31,23 @@ export async function readPasswordDoc(passwordName: string) {
   return await passwordCollection.findOne({ name: passwordName });
 }
 
-export async function updatePasswordDoc(passwordDoc: PasswordDoc) {
+export async function updatePasswordDoc(
+  passwordName: string,
+  newPasswordValue: string
+) {
   const passwordCollection = await getCollection<PasswordDoc>("passwords");
   return await passwordCollection.updateOne(
-    { name: passwordDoc.name },
-    { $set: { value: passwordDoc.value } }
+    { name: passwordName },
+    { $set: { value: newPasswordValue } }
   );
 }
 
-export async function deletePasswordDoc(passwordName: string) {
+export async function deletePasswordDoc(
+  passwordName: string
+): Promise<Boolean> {
   const passwordCollection = await getCollection<PasswordDoc>("passwords");
-  return await passwordCollection.deleteMany({ name: passwordName });
+  const deleteResult = await passwordCollection.deleteOne({
+    name: passwordName,
+  });
+  return deleteResult.deletedCount >= 1;
 }

@@ -20,7 +20,7 @@ const run = async () => {
     await connectDB(url, "pw-manager-clara");
     await createPasswordDoc({ name: "Clara", value: "0110" });
     console.log(await readPasswordDoc("Clara"));
-    await updatePasswordDoc({ name: "Clara", value: "1001" });
+    await updatePasswordDoc("Clara", "0110");
     await deletePasswordDoc("Clara");
     await closeDB();
   } catch (error) {
