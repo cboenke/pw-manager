@@ -19,9 +19,9 @@ const run = async () => {
 
   try {
     await connectDB(url, "pw-manager-clara");
-    await createPasswordDoc({ name: "Clara", value: "0110" });
+    console.log(await createPasswordDoc({ name: "Clara", value: "0110" }));
     console.log(await readPasswordDoc("Clara"));
-    await updatePasswordValue("Clara", "0110");
+    await updatePasswordValue("Clara", "1110");
     await deletePasswordDoc("Clara");
     await closeDB();
   } catch (error) {
