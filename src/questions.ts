@@ -25,7 +25,7 @@ type Action = {
   passwordName: string;
 };
 
-export const askForAction = (): Promise<Action> =>
+export const askForAction = async (): Promise<Action> =>
   prompts([
     {
       type: "select",
