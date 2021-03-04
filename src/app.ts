@@ -10,6 +10,7 @@ import {
   deletePasswordDoc,
   readPasswordDoc,
   updatePasswordDoc,
+  updatePasswordValue,
 } from "./db";
 dotenv.config();
 
@@ -20,7 +21,7 @@ const run = async () => {
     await connectDB(url, "pw-manager-clara");
     await createPasswordDoc({ name: "Clara", value: "0110" });
     console.log(await readPasswordDoc("Clara"));
-    await updatePasswordDoc("Clara", "0110");
+    await updatePasswordValue("Clara", "0110");
     await deletePasswordDoc("Clara");
     await closeDB();
   } catch (error) {
