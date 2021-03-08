@@ -5,7 +5,7 @@ GET http://localhost:3333/api/passwords/BR5
 GET http://localhost:3333/api/passwords/wifi3564ksdf
 
 ### DELETE a password by name
-DELETE http://localhost:3333/api/passwords/Clara
+DELETE http://localhost:3333/api/passwords/WiFi
 
 ### POST a new password
 POST http://localhost:3333/api/passwords
